@@ -1,0 +1,33 @@
+<br />
+
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div *ngIf="form.errors" class="alert alert-danger">
+        <div *ngIf="form.errors.inValidLogin">The username or password is invalid</div>
+    </div>
+    <div formGroupName="account">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input formControlName="username" id="username" type="text" class="form-control">
+            <div *ngIf="username.pending" class="loader"></div>
+            <div *ngIf="username.pending" class="panel">Checking the uniqueness..</div>
+            <div class="alert alert-danger" *ngIf="form.get('account.username').touched && !form.get('account.username').valid">
+                <div *ngIf="username.errors && username.errors.minlength">username should be at least {{ username.errors.minlength.requiredLength }} characters</div>
+                <div *ngIf="username.errors && username.errors.required">username is required</div>
+                <div *ngIf="username.errors && username.errors.pattern">Invalid username</div>
+                <div *ngIf="username.errors && username.errors.cannotContainSpace">username cannot contain space</div>
+                <div *ngIf="username.errors && username.errors.shouldBeUnique">username is already taken</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input formControlName="password" id="password" type="text" class="form-control">
+            <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+                <div *ngIf="password.errors.minlength">password should be at least {{ password.errors.minlength.requiredLength }} characters</div>
+                <div *ngIf="password.errors.required">password is required</div>
+                <div *ngIf="password.errors.pattern">Invalid password</div>
+                <div *ngIf="password.errors.cannotContainSpace">username cannot contain space</div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>

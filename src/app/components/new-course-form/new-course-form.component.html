@@ -1,0 +1,31 @@
+<br />
+<form #form='ngForm' (ngSubmit)='submit(form.value)'>
+  <div class="form-group">
+    <label for="name">Course Name</label>
+    <input ngModel name='name' #name='ngModel' required minlength="3" pattern="[a-zA-Z ]*" type="text" id="name" class="form-control">
+    <div *ngIf='name.touched && name.invalid' class="alert alert-danger">
+      <div *ngIf='name.errors.required'>Name field is required</div>
+      <div *ngIf='name.errors.minlength'>Name field should be atleast {{ name.errors.minlength.requiredLength }} character's</div>
+      <div *ngIf='name.errors.pattern'>Name field cannot be invalid</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select required ngModel #category='ngModel' name='category' id="category" class="form-control">
+      <option value="0">Please select category</option>
+      <option *ngFor='let c of categories' [value]="c.id">
+        {{ c.name }}
+      </option>
+    </select>
+    <div class="alert alert-danger" *ngIf="(category.touched && category.invalid) || category.value == '0'">
+      category field is required
+    </div>
+  </div>
+  <div class="checkbox">
+    <label for="moneyBackGuarantee">
+      <input required ngModel name='hasMoneyBackGuarantee' #hasMoneyBackGuarantee='ngModel' type="checkbox" id="moneyBackGuarantee"> 30day's money back guarantee
+    </label>
+  </div>
+  <p>{{ form.value | json }}</p>
+  <button [disabled]='form.invalid' class="btn btn-primary">Create</button>
+</form>

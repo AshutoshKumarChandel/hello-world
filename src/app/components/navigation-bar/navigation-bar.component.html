@@ -1,0 +1,91 @@
+<ul class="nav nav-pills">
+  <li [class.active]="viewMode == 'change-password'">
+    <a (click)="viewMode='change-password'">Change Password</a>
+  </li>
+  <li [class.active]="viewMode == 'topics'">
+    <a (click)="viewMode='topics'">Topics Form</a>
+  </li>
+  <li [class.active]="viewMode == 'signUpForm'">
+    <a (click)="viewMode='signUpForm'">Signup Form</a>
+  </li>
+  <li [class.active]="viewMode == 'newCourseForm'">
+    <a (click)="viewMode='newCourseForm'">Course Form</a>
+  </li>
+  <li [class.active]="viewMode == 'contactForm'">
+    <a (click)="viewMode='contactForm'">Contact Form</a>
+  </li>
+  <li [class.active]="viewMode == 'zippy'">
+    <a (click)="viewMode='zippy'">Zippy</a>
+  </li>
+  <li [class.active]="viewMode == 'courses'">
+    <a (click)="viewMode='courses'">Courses</a>
+  </li>
+  <li [class.active]="viewMode == 'course'">
+    <a (click)="viewMode='course'">Course</a>
+  </li>
+  <li [class.active]="viewMode == 'directiveCourses'">
+    <a (click)="viewMode='directiveCourses'">Directive courses</a>
+  </li>
+  <li [class.active]="viewMode == 'instructor'">
+    <a (click)="viewMode='instructor'">Instructor</a>
+  </li>
+  <li [class.active]="viewMode == 'favorite'">
+    <a (click)="viewMode='favorite'">Favorite</a>
+  </li>
+  <li [class.active]="viewMode == 'likes'">
+    <a (click)="viewMode='likes'">Likes</a>
+  </li>
+  <li [class.active]="viewMode == 'customDirective'">
+    <a (click)="viewMode='customDirective'">Custom Directive</a>
+  </li>
+</ul>
+
+<div [ngSwitch]="viewMode">
+  <div *ngSwitchCase="'change-password'">
+    <change-password></change-password>
+  </div>
+  <div *ngSwitchCase="'topics'">
+    <topics-section></topics-section>
+  </div>
+  <div *ngSwitchCase="'signUpForm'">
+    <signup-form></signup-form>
+  </div>
+  <div *ngSwitchCase="'newCourseForm'">
+    <new-course-form></new-course-form>
+  </div>
+  <div *ngSwitchCase="'contactForm'">
+    <contact-form></contact-form>
+  </div>
+  <div *ngSwitchCase="'zippy'">
+    <zippy title="Shipping Details">
+      BT Eserve India Pvt. Ltd.
+      <br/> RMZ Ecoworld
+      <br/> Block - 4AB
+      <br/> Bengaluru - 560103
+    </zippy>
+  </div>
+  <div *ngSwitchCase="'courses'">
+    <courses></courses>
+  </div>
+  <div *ngSwitchCase="'course'">
+    <course></course>
+  </div>
+  <div *ngSwitchCase="'directiveCourses'">
+    <directive-courses></directive-courses>
+  </div>
+  <div *ngSwitchCase="'instructor'">
+    <instructor></instructor>
+  </div>
+  <div *ngSwitchCase="'favorite'">
+    <favorite [isFavorite]="post.isFavorite" (favoriteChanged)="onFavoriteChanged($event)"></favorite>
+  </div>
+  <div *ngSwitchCase="'likes'">
+    <like [likesCount]="tweet.likesCount" [isActive]="tweet.isLiked"></like>
+  </div>
+  <div *ngSwitchCase="'customDirective'">
+    <input type="text" [appInputFormat]="'uppercase'">
+  </div>
+  <div *ngSwitchCase="'default'">
+    please use the tab's to navigate..
+  </div>
+</div>
